@@ -8,10 +8,27 @@ One image summing up Saturday 21 November 2026's world news: Iran hits US bases 
 
 The program copies the poster in entry.png to the output directory, after checking it is a complete PNG inside the 1024×1024 and 1 MiB limits.
 
-## Run it
+## How to run
+
+The program needs Node.js and nothing else — it only uses the
+standard library, so there are no packages to install. Point
+`MAKEFUN_OUTPUT_DIR` at the folder the poster should land in and
+run `main.ts`: it checks the poster is a complete PNG inside the
+1024×1024 and 1 MiB limits, copies it over, then re-reads the copy
+and prints its SHA-256 so you can confirm the copy is byte-for-byte
+identical to the original:
 
 ```sh
 mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
+```
+
+To validate the poster without copying anything, pass `--verify`.
+It prints a report — dimensions, file size, and every PNG chunk
+with its CRC result — and exits with a non-zero code if any chunk's
+CRC is bad:
+
+```sh
+node main.ts --verify
 ```
 
 ---
